@@ -236,7 +236,7 @@ def run():
         
         # TODO: Train NN using the train_nn function
         
-        epochs = 100
+        epochs = 50
         batch_size = BATCH_SIZE
         
         loss_per_epoch = train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_loss, image_input, correct_label, keep_prob, learning_rate)     
@@ -244,10 +244,10 @@ def run():
         # TODO: Save inference data using helper.save_inference_samples
         helper.save_inference_samples(runs_dir, data_dir, sess, image_shape, logits, keep_prob, image_input)        
      
+        # Add ops to save all the variables.
+        saver = tf.train.Saver()   
         saver.save(sess, './data/trained_model')
-        # Save the variables to disk.
         save_path = saver.save(sess, "./data/trained_model.ckpt")
-        
         print("Model saved in : %s" % save_path)
 
         # OPTIONAL: Apply the trained model to a video
